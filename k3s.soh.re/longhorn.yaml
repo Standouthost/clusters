@@ -4,15 +4,10 @@ metadata:
   name: longhorn
   namespace: argocd
 spec:
-  project: default
-  sources:
-    - chart: longhorn
-      repoURL: https://charts.longhorn.io/
-      targetRevision: v1.7.1
-      helm:
-        values: |
-          preUpgradeChecker:
-            jobEnabled: false
+  source:
+    repoURL: https://github.com/Standouthost/helm-charts
+    targetRevision: main
+    path: longhorn
   destination:
     name: in-cluster
     namespace: longhorn
