@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: statuscode-soh-re
+  name: hey-soh-re
   namespace: argocd
 spec:
   project: default
@@ -9,18 +9,9 @@ spec:
     chart: webapp
     repoURL: zot.soh.re
     targetRevision: 1.0.2
-    helm:
-      values: |
-        image:
-          name: statuscode
-          tag: v1.0.0
-        service:
-          targetPort: 4567
-        virtualServer.hosts[0]: "statuscode.soh.re"
-
   destination:
     name: in-cluster
-    namespace: statuscode-soh-re
+    namespace: hey-soh-re
   syncPolicy:
     automated:
       prune: true
