@@ -14,6 +14,7 @@ spec:
         image:
           name: statuscode
           tag: v1.0.0
+          pullPolicy: "Always"
         service:
           targetPort: 4567
         virtualService: 
