@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: etherpad-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 1.1.1
+    helm:
+      values: |
+        image:
+          name: etherpad/etherpad
+          repository: docker.io
+          tag: 2.2.5
+          pullPolicy: "Always"
+        service:
+          targetPort: 9001
+        virtualService: 
+          hosts:
+            - "etherpad.soh.re"
+        secret:
+          enabled: true
+          name: db-creds
+
+  destination:
+    name: in-cluster
+    namespace: etherpad-soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
