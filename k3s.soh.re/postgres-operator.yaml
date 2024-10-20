@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mariadb
+  name: postgres-operator
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/Standouthost/helm-charts
     targetRevision: main
-    path: mariadb
+    path: postgres-operator
   destination:
     name: in-cluster
-    namespace: mariadb
+    namespace: postgres
   syncPolicy:
     automated:
       prune: true
