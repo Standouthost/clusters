@@ -8,7 +8,7 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 1.1.1
+    targetRevision: 1.2.0
     helm:
       values: |
         image:
@@ -24,6 +24,16 @@ spec:
         secret:
           enabled: true
           name: db-creds
+        cluster:
+          enabled: true
+          name: postgres-cluster
+          instances: 2
+          storage:
+            size: 10Gi
+          bootstrap:
+            initdb:
+              database: etherpad
+              owner: etherpad
 
   destination:
     name: in-cluster
