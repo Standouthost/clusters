@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgres-operator
+  name: cloudnative-pg
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/Standouthost/helm-charts
-    targetRevision: main
-    path: postgres-operator
+    chart: cloudnative-pg
+    repoURL: https://cloudnative-pg.github.io/charts
+    targetRevision: 0.22.1
   destination:
     name: in-cluster
-    namespace: postgres
+    namespace: cloudnative-pg
   syncPolicy:
     automated:
       prune: true
