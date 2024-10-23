@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ip-jmainguy-com
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.0.0
+    helm:
+      values: |
+        replicaCount: 2
+        image:
+          name: trafex/php-nginx
+          repository: docker.io
+          tag: latest
+          pullPolicy: "Always"
+        service:
+          targetPort: 8080
+        virtualService: 
+          hosts:
+            - "ip.jmainguy.com"
+        configMaps:
+          - name: payload
+            mountPath: "/var/www/html"
+            data:
+              index.php: |
+                <?php
+                #$ip = getenv("REMOTE_ADDR");
+                $ip = getenv('HTTP_X_FORWARDED_FOR');
+                print 'Your IP is '.$ip.' Want to fight about it?';
+                echo "\n";
+                ?>
+
+  destination:
+    name: in-cluster
+    namespace: ip-jmainguy-com
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
