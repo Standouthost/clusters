@@ -11,6 +11,7 @@ spec:
     targetRevision: 2.0.0
     helm:
       values: |
+        name: spam-soh-re
         replicaCount: 2
         image:
           name: wp-spam
