@@ -28,9 +28,17 @@ spec:
             data:
               index.php: |
                 <?php
-                #$ip = getenv("REMOTE_ADDR");
+                # Get the forwarded IPs
                 $ip = getenv('HTTP_X_FORWARDED_FOR');
-                print 'Your IP is '.$ip.' Want to fight about it?';
+
+                # Split the IPs by comma
+                $ip_array = explode(',', $ip);
+
+                # Use only the first IP (public IP)
+                $public_ip = trim($ip_array[0]);
+
+                # Print the public IP
+                print 'Your IP is '.$public_ip.' Want to fight about it?';
                 echo "\n";
                 ?>
 
