@@ -10,6 +10,7 @@ spec:
     repoURL: zot.soh.re
     targetRevision: 1.0.0
     helm:
+      releaseName: right
       values: |
         virtualService: 
           hosts:
