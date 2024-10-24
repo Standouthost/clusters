@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: standouthost-com
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 1.0.2
+    helm:
+      values: |
+        image:
+          name: statuscode
+          tag: v1.0.0
+          pullPolicy: "Always"
+        service:
+          targetPort: 8080
+        virtualService: 
+          hosts:
+            - "standouthost.com"
+        env:
+          REPO_URL: "https://github.com/jmainguy/standouthost.com"
+
+  destination:
+    name: in-cluster
+    namespace: standouthost-com
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
