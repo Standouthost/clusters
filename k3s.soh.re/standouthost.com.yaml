@@ -8,11 +8,12 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 1.0.2
+    targetRevision: 2.1.0
     helm:
       values: |
+        name: standouthost
         image:
-          name: statuscode
+          name: autoweb
           tag: v1.0.0
           pullPolicy: "Always"
         service:
