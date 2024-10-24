@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jmainguy-com
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.1.0
+    helm:
+      values: |
+        name: jmainguy
+        image:
+          name: autoweb
+          tag: v1.0.0
+          pullPolicy: "Always"
+        service:
+          targetPort: 8080
+        virtualService: 
+          hosts:
+            - "jmainguy.com"
+        env:
+          REPO_URL: "https://github.com/jmainguy/jmainguy.com"
+
+  destination:
+    name: in-cluster
+    namespace: jmainguy-com
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
