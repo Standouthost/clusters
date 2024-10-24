@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.2.0
+    helm:
+      values: |
+        name: nextcloud
+        replicaCount: 1
+        image:
+          name: nextcloud
+          repository: docker.io
+          tag: 30
+          pullPolicy: "Always"
+        service:
+          targetPort: 80
+        virtualService: 
+          hosts:
+            - "nextcloud.soh.re"
+        pvc:
+          enabled: true
+          mountPath: /var/www/html
+          size: "80Gi"
+        cluster:
+          enabled: true
+          name: postgres-cluster
+          instances: 2
+          storage:
+            size: 10Gi
+          bootstrap:
+            initdb:
+              database: nextcloud
+              owner: nextcloud
+
+  destination:
+    name: in-cluster
+    namespace: nextcloud-soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
