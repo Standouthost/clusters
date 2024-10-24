@@ -27,7 +27,7 @@ spec:
           enabled: true
           mountPath: /var/www/html
           size: "80Gi"
-        cluster:
+        postgres:
           enabled: true
           name: postgres-cluster
           instances: 2
