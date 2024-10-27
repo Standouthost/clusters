@@ -8,7 +8,7 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 2.0.0
+    targetRevision: 2.3.2
     helm:
       values: |
         name: spam-soh-re
@@ -19,7 +19,10 @@ spec:
           tag: v1.0.7
           pullPolicy: "Always"
         service:
+          type: ClusterIP
+          port: 80
           targetPort: 8080
+          name: spam-soh-re
         virtualService: 
           hosts:
             - "spam.soh.re"

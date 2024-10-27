@@ -8,7 +8,7 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 2.0.0
+    targetRevision: 2.3.2
     helm:
       values: |
         replicaCount: 2
@@ -18,7 +18,10 @@ spec:
           tag: latest
           pullPolicy: "Always"
         service:
+          type: ClusterIP
+          port: 80
           targetPort: 8080
+          name: ip-jmainguy-com
         virtualService: 
           hosts:
             - "ip.jmainguy.com"

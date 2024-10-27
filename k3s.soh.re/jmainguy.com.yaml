@@ -8,7 +8,7 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 2.1.0
+    targetRevision: 2.3.2
     helm:
       values: |
         name: jmainguy
@@ -17,10 +17,16 @@ spec:
           tag: v1.0.0
           pullPolicy: "Always"
         service:
+          type: ClusterIP
+          port: 80
           targetPort: 8080
+          name: jmainguy-com
+
         virtualService: 
           hosts:
-            - "jmainguy.com"
+	    - "jmainguy.com"
+            - "www.jmainguy.com"
+          redirectToPrimary: true
         env:
           REPO_URL: "https://github.com/jmainguy/jmainguy.com"
 

@@ -8,7 +8,7 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 2.1.0
+    targetRevision: 2.3.2
     helm:
       values: |
         name: standouthost
@@ -17,10 +17,15 @@ spec:
           tag: v1.0.0
           pullPolicy: "Always"
         service:
+          type: ClusterIP
+          port: 80
           targetPort: 8080
+          name: standouthost-com
         virtualService: 
+          redirectToPrimary: true
           hosts:
             - "standouthost.com"
+            - "www.standouthost.com"
         env:
           REPO_URL: "https://github.com/jmainguy/standouthost.com"
 
