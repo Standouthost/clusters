@@ -8,11 +8,24 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 2.3.1
+    targetRevision: 2.3.2
     helm:
       values: |
         name: hey-soh-re
         replicaCount: 2
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+          name: hey-soh-re
+        virtualService:
+          hosts:
+            - "hey.soh.re"
+        image:
+          repository: zot.soh.re
+          name: hey.soh.re
+          tag: "v1.0.6"
+          pullPolicy: IfNotPresent
 
   destination:
     name: in-cluster
