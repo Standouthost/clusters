@@ -8,9 +8,10 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 1.2.0
+    targetRevision: 2.3.2
     helm:
       values: |
+        name: etherpad
         replicaCount: 1
         image:
           name: etherpad/etherpad
@@ -18,14 +19,17 @@ spec:
           tag: 2.2.5
           pullPolicy: "Always"
         service:
+          type: ClusterIP
+          port: 80
           targetPort: 9001
+          name: etherpad
         virtualService: 
           hosts:
             - "etherpad.soh.re"
         secret:
           enabled: true
           name: db-creds
-        cluster:
+        postgres:
           enabled: true
           name: postgres-cluster
           instances: 2

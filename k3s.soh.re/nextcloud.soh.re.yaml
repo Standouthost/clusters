@@ -22,7 +22,7 @@ spec:
           type: ClusterIP
           port: 80
           targetPort: 8080
-          name: jmainguy-com
+          name: nextcloud
         virtualService: 
           hosts:
             - "nextcloud.soh.re"

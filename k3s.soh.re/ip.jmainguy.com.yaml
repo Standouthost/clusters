@@ -11,6 +11,7 @@ spec:
     targetRevision: 2.3.2
     helm:
       values: |
+        name: ip-jmainguy-com
         replicaCount: 2
         image:
           name: trafex/php-nginx

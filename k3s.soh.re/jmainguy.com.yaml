@@ -20,7 +20,7 @@ spec:
           type: ClusterIP
           port: 80
           targetPort: 8080
-          name: jmainguy-com
+          name: jmainguy
 
         virtualService: 
           hosts:
