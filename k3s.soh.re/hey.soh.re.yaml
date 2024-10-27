@@ -8,7 +8,12 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 1.0.2
+    targetRevision: 2.3.0
+    helm:
+      values: |
+        name: hey-soh-re
+        replicaCount: 2
+
   destination:
     name: in-cluster
     namespace: hey-soh-re
