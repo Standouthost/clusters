@@ -13,6 +13,7 @@ spec:
       releaseName: right
       values: |
         virtualService: 
+          redirectToPrimary: true
           hosts:
             - "rightwaypropertycare.com"
             - "www.rightwaypropertycare.com"
