@@ -8,13 +8,14 @@ spec:
   source:
     chart: wordpress
     repoURL: zot.soh.re
-    targetRevision: 1.0.0
+    targetRevision: 1.1.1
     helm:
       releaseName: right
       values: |
         virtualService: 
           hosts:
             - "rightwaypropertycare.com"
+            - "www.rightwaypropertycare.com"
 
   destination:
     name: in-cluster
