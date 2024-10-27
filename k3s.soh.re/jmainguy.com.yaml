@@ -24,7 +24,7 @@ spec:
 
         virtualService: 
           hosts:
-	    - "jmainguy.com"
+            - "jmainguy.com"
             - "www.jmainguy.com"
           redirectToPrimary: true
         env:
