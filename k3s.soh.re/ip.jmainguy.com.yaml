@@ -33,7 +33,7 @@ spec:
               index.php: |
                 <?php
                 # Get the forwarded IPs
-                $ip = getenv('HTTP_X_FORWARDED_FOR');
+                $ip = $_SERVER['REMOTE_ADDR'];
 
                 # Split the IPs by comma
                 $ip_array = explode(',', $ip);
