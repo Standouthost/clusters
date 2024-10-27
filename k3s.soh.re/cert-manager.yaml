@@ -6,13 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.jetstack.io
-    chart: cert-manager
-    targetRevision: v1.16.1
-    helm:
-      values: |
-        crds:
-          enabled: true
+    repoURL: https://github.com/Standouthost/helm-charts
+    targetRevision: main
+    path: cert-manager
   destination:
     name: in-cluster
     namespace: cert-manager
