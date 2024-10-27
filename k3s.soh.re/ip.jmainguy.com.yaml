@@ -32,8 +32,8 @@ spec:
             data:
               index.php: |
                 <?php
-                # Get the forwarded IPs
-                $ip = $_SERVER['REMOTE_ADDR'];
+                
+                $ip = getenv('HTTP_CLIENT_IP');
 
                 # Split the IPs by comma
                 $ip_array = explode(',', $ip);
