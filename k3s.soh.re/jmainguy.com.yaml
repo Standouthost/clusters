@@ -12,6 +12,7 @@ spec:
     helm:
       values: |
         name: jmainguy
+        replicaCount: 1
         image:
           name: autoweb
           tag: v1.0.0
