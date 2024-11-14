@@ -32,7 +32,7 @@ spec:
         postgres:
           enabled: true
           name: postgres-cluster
-          instances: 2
+          instances: 1
           storage:
             size: 10Gi
           bootstrap:
