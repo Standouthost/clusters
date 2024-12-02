@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubevirt
+  namespace: kubevirt
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Standouthost/helm-charts
+    targetRevision: main
+    path: kubevirt
+  destination:
+    name: in-cluster
+    namespace: kubevirt
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
