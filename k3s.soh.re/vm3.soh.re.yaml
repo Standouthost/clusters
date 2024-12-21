@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vm3-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Standouthost/helm-charts
+    targetRevision: main
+    path: sohre-vm
+    helm:
+      values: |
+        name: vm3.soh.re 
+  destination:
+    name: in-cluster
+    namespace: soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
