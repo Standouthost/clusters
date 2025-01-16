@@ -25,7 +25,7 @@ spec:
           repository: zot.soh.re
           name: math-quest
           tag: "latest"
-          pullPolicy: IfNotPresent
+          pullPolicy: Always
 
   destination:
     name: in-cluster
