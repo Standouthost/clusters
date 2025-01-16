@@ -24,7 +24,7 @@ spec:
         image:
           repository: zot.soh.re
           name: math-quest
-          tag: "latest:
+          tag: "latest"
           pullPolicy: IfNotPresent
 
   destination:
