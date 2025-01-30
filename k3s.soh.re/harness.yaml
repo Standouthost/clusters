@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harness
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Standouthost/helm-charts
+    targetRevision: main
+    path: harness
+  destination:
+    name: in-cluster
+    namespace: harness-delegate-ng
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
