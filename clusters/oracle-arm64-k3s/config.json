@@ -1,5 +1,10 @@
 {
   "cluster": {
     "name": "oracle-arm64-k3s"
+    "apps": [
+      {
+        "name": "istio-application"
+      }
+    ]
   }
 }

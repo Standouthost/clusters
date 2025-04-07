@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: istio
+  name: istio-application
   namespace: argocd
 spec:
   goTemplate: true
@@ -42,4 +42,5 @@ spec:
         namespace: istio-system
         jqPathExpressions:
           - '.spec.template.spec.containers[] | select(.name=="discovery") | .env[] | select(.name=="GOMEMLIMIT")'
-
+  when:
+    - condition: "{{contains .cluster.apps .metadata.name}}"
