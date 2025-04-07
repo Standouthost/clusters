@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ip-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.3.2
+    helm:
+      values: |
+        name: ip-soh-re
+        replicaCount: 2
+        image:
+          name: trafex/php-nginx
+          repository: docker.io
+          tag: latest
+          pullPolicy: "Always"
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+          name: ip-soh-re
+        virtualService: 
+          hosts:
+            - "ip.soh.re"
+        configMaps:
+          - name: payload
+            mountPath: "/var/www/html"
+            data:
+              index.php: |
+                <?php
+                
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
+
+                # Split the IPs by comma
+                $ip_array = explode(',', $ip);
+
+                # Use only the first IP (public IP)
+                $public_ip = trim($ip_array[0]);
+
+                # Print the public IP
+                print 'Your IP is '.$public_ip.' Want to fight about it?';
+                echo "\n";
+                ?>
+
+  destination:
+    name: oracle-arm64-k3s
+    namespace: ip-soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
