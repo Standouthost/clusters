@@ -11,7 +11,8 @@ spec:
         repoURL: https://github.com/Standouthost/clusters.git
         revision: HEAD
         files:
-          - path: "clusters/**/config.json"  # Targeting all config.json in clusters
+#          - path: "clusters/**/config.json"  # Targeting all config.json in clusters
+          - path: "clusters/oracle-arm64-k3s/config.json"  # Targeting specific cluster
   template:
     metadata:
       name: '{{.cluster.name}}-istio'  # Example: k3s-soh-re-istio
@@ -42,5 +43,3 @@ spec:
         namespace: istio-system
         jqPathExpressions:
           - '.spec.template.spec.containers[] | select(.name=="discovery") | .env[] | select(.name=="GOMEMLIMIT")'
-  when:
-    - condition: "{{contains .cluster.apps .metadata.name}}"
