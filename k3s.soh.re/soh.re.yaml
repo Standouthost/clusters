@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: sohre
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: soh-re
   syncPolicy:
     automated:

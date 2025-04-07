@@ -10,7 +10,7 @@ spec:
     repoURL: https://charts.crossplane.io/stable
     targetRevision: 1.19.1
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: crossplane
   syncPolicy:
     automated:

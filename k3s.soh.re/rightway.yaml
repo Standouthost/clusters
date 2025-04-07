@@ -19,7 +19,7 @@ spec:
             - "www.rightwaypropertycare.com"
 
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: rightway
   syncPolicy:
     automated:

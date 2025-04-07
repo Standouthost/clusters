@@ -32,7 +32,7 @@ spec:
           REPO_URL: "https://github.com/jmainguy/jmainguy.com"
 
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: jmainguy-com
   syncPolicy:
     automated:

@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: zot
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: zot
   syncPolicy:
     automated:

@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: oracle-infrastructure
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: crossplane
   syncPolicy:
     automated:

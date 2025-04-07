@@ -26,7 +26,7 @@ spec:
             - "statuscode.soh.re"
 
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: statuscode-soh-re
   syncPolicy:
     automated:

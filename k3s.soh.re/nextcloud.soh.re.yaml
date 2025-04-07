@@ -42,7 +42,7 @@ spec:
               owner: nextcloud
 
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: nextcloud-soh-re
   syncPolicy:
     automated:

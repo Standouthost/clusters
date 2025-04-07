@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: cert-manager
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: cert-manager
   syncPolicy:
     automated:
