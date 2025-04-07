@@ -29,7 +29,7 @@ spec:
               service:
                 type: LoadBalancer
                 {{- if eq .cluster.name "oracle-arm64-k3s" }}
-                externalTrafficPolicy: Cluster
+                externalTrafficPolicy: Local
                 {{- end }}
 
       destination:
