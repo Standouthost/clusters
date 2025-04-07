@@ -9,9 +9,6 @@ spec:
     repoURL: https://github.com/Standouthost/helm-charts
     targetRevision: main
     path: istio
-  destination:
-    name: oracle-arm64-k3s
-    namespace: istio-system
   syncPolicy:
     automated:
       prune: true
