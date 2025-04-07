@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: in-cluster
+    name: k3s.soh.re
     namespace: argocd
   project: default
   source:
