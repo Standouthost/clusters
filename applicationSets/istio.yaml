@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istio
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/Standouthost/clusters.git
+        revision: HEAD
+        files:
+          - path: "clusters/**/config.json"  # Targeting all config.json in clusters
+  template:
+    metadata:
+      name: '{{.cluster.name}}-istio'  # Example: k3s-soh-re-istio
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/Standouthost/helm-charts
+        targetRevision: main
+        path: istio
+      destination:
+        name: '{{.cluster.name}}'
+        namespace: istio-system  # Namespace where resources should be deployed
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+      ignoreDifferences:
+      - group: admissionregistration.k8s.io
+        kind: ValidatingWebhookConfiguration
+        jsonPointers:
+        - /webhooks/0/failurePolicy
+      - group: apps
+        kind: Deployment
+        name: istiod
+        namespace: istio-system
+        jqPathExpressions:
+          - '.spec.template.spec.containers[] | select(.name=="discovery") | .env[] | select(.name=="GOMEMLIMIT")'
+
