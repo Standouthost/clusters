@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-specific-application
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/Standouthost/clusters.git
+        revision: HEAD
+        files:
+          - path: "clusters/**/config.json"  # Targeting all config.json in clusters
+  template:
+    metadata:
+      name: '{{.cluster.name}}-cluster-specific'  # Example: k3s-soh-re-istio
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/Standouthost/clusters
+        targetRevision: main
+        path: clusters/{{.cluster.name}}/applications
+      destination:
+        name: k3s.soh.re
+        namespace: argocd
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
