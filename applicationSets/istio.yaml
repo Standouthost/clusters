@@ -22,6 +22,8 @@ spec:
         repoURL: https://github.com/Standouthost/helm-charts
         targetRevision: main
         path: istio
+        helm:
+          releaseName: "istio"  # Set the release name explicitly
       destination:
         name: '{{.cluster.name}}'
         namespace: istio-system  # Namespace where resources should be deployed
