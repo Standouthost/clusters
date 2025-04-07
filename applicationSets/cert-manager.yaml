@@ -21,6 +21,8 @@ spec:
         repoURL: https://github.com/Standouthost/helm-charts
         targetRevision: main
         path: cert-manager
+        helm:
+          releaseName: "cert-manager"  # Set the release name explicitly
       destination:
         name: '{{.cluster.name}}'
         namespace: cert-manager  # Namespace where resources should be deployed
