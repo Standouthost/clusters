@@ -24,6 +24,14 @@ spec:
         path: istio
         helm:
           releaseName: "istio"  # Set the release name explicitly
+          values: |
+            gateway:
+              service:
+                type: LoadBalancer
+                {{- if eq .cluster.name "oracle-arm64-k3s" }}
+                externalTrafficPolicy: Local
+                {{- end }}
+
       destination:
         name: '{{.cluster.name}}'
         namespace: istio-system  # Namespace where resources should be deployed
