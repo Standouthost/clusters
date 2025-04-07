@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: istio
   destination:
-    name: in-cluster
+    name: oracle-arm64-k3s
     namespace: istio-system
   syncPolicy:
     automated:
