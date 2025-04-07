@@ -11,7 +11,7 @@ spec:
         repoURL: https://github.com/Standouthost/clusters.git
         revision: HEAD
         files:
-          - path: "clusters/oracle-arm64-k3s/config.json"  # Targeting specific cluster
+          - path: "clusters/**/config.json"  # Targeting all clusters
   template:
     metadata:
       name: '{{.cluster.name}}-cert-manager'  # Example: k3s-soh-re-cert-manager
