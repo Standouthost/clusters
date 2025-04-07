@@ -6,9 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    chart: metallb
-    repoURL: https://metallb.github.io/metallb
-    targetRevision: 0.14.9
+    repoURL: https://github.com/Standouthost/helm-charts
+    targetRevision: main
+    path: metallb
+    helm:
+      values: |
+        serverIPAddress: 10.0.1.134/32
   destination:
     name: oracle-arm64-k3s
     namespace: metallb
