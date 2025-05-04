@@ -25,7 +25,7 @@ spec:
           name: info-soh-re
         virtualService: 
           hosts:
-            - "ip.soh.re"
+            - "info.soh.re"
   destination:
     name: oracle-arm64-k3s
     namespace: info-soh-re
