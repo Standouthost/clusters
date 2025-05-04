@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: info-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.3.2
+    helm:
+      values: |
+        name: info-soh-re
+        replicaCount: 2
+        image:
+          name: info
+          repository: zot.soh.re
+          tag: latest
+          pullPolicy: "Always"
+        service:
+          type: ClusterIP
+          port: 8080
+          targetPort: 8080
+          name: info-soh-re
+        virtualService: 
+          hosts:
+            - "ip.soh.re"
+  destination:
+    name: oracle-arm64-k3s
+    namespace: info-soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
