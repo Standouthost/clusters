@@ -17,6 +17,9 @@ spec:
           media:
             storageClass: longhorn
             size: 50Gi
+        service:
+          type: NodePort
+
   destination:
     name: k3s.soh.re
     namespace: jellyfin
