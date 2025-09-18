@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bizbuy-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.3.2
+    helm:
+      values: |
+        name: bizbuy-soh-re
+        replicaCount: 2
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+          name: bizbuy-soh-re
+        virtualService:
+          hosts:
+            - "bizbuy.soh.re"
+        image:
+          repository: zot.soh.re
+          name: bizbuy
+          tag: "latest"
+          pullPolicy: Always
+
+  destination:
+    name: k3s.soh.re
+    namespace: bizbuy-soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
