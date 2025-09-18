@@ -24,7 +24,7 @@ spec:
         image:
           repository: zot.soh.re
           name: bizbuy
-          tag: "latest"
+          tag: "v1.0.0"
           pullPolicy: Always
 
   destination:
