@@ -17,7 +17,6 @@ spec:
           hosts:
             - "ahhc.org"
             - "www.ahhc.org"
-            - "test.ahhc.org"
 
   destination:
     name: k3s.soh.re
