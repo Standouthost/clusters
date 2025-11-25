@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hockey-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.4.0
+    helm:
+      values: |
+        name: hockey-soh-re
+        replicaCount: 2
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+          name: hockey-soh-re
+        virtualService:
+          hosts:
+            - "hockey.soh.re"
+        image:
+          repository: zot.soh.re
+          name: hockey
+          tag: "latest"
+          pullPolicy: Always
+
+  destination:
+    name: k3s.soh.re
+    namespace: hockey-soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
