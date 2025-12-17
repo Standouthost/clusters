@@ -24,8 +24,8 @@ spec:
         image:
           repository: zot.soh.re
           name: hockey
-          tag: "latest"
-          pullPolicy: Always
+          tag: "v1.6.0"
+          pullPolicy: IfNotPresent
 
   destination:
     name: k3s.soh.re
