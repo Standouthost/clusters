@@ -24,7 +24,7 @@ spec:
         image:
           repository: zot.soh.re
           name: hockey
-          tag: "v1.6.0"
+          tag: "v1.7.0"
           pullPolicy: IfNotPresent
 
   destination:
