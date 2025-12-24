@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         name: mastermind
-        replicaCount: 2
+        replicaCount: 1
         service:
           type: ClusterIP
           port: 80
