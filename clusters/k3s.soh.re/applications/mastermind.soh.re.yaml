@@ -17,7 +17,7 @@ spec:
           type: ClusterIP
           port: 80
           targetPort: 8080
-          name: mastermind-soh-re
+          name: mastermind
         virtualService:
           hosts:
             - "mastermind.soh.re"
