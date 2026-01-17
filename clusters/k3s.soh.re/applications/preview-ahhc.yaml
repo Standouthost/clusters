@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: preview-ahhc
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: wordpress
+    repoURL: zot.soh.re
+    targetRevision: 1.2.0
+    helm:
+      releaseName: preview-ahhc
+      values: |
+        virtualService: 
+          redirectToPrimary: true
+          hosts:
+            - "ahhc-preview.standouthost.com"
+
+  destination:
+    name: k3s.soh.re
+    namespace: preview-ahhc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
