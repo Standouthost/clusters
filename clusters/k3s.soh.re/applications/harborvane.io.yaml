@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harborvane-io
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.4.0
+    helm:
+      values: |
+        name: harborvane
+        replicaCount: 1
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+          name: harborvane/harborvane
+        virtualService:
+          hosts:
+            - "harborvane.io"
+        image:
+          repository: zot.soh.re
+          name: harborvane
+          tag: "latest"
+          pullPolicy: Always
+
+  destination:
+    name: k3s.soh.re
+    namespace: harborvane-io
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
