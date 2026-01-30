@@ -17,13 +17,13 @@ spec:
           type: ClusterIP
           port: 80
           targetPort: 8080
-          name: harborvane/harborvane
+          name: harborvane
         virtualService:
           hosts:
             - "harborvane.io"
         image:
           repository: zot.soh.re
-          name: harborvane
+          name: harborvane/harborvane
           tag: "latest"
           pullPolicy: Always
 
