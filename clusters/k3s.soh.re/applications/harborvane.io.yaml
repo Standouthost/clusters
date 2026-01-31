@@ -26,6 +26,9 @@ spec:
           name: harborvane/harborvane
           tag: "latest"
           pullPolicy: Always
+        secret:
+          enabled: true
+          name: harborvane-config
 
   destination:
     name: k3s.soh.re
