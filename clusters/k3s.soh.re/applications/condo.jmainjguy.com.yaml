@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: condo-jmainguy-com
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.4.0
+    helm:
+      values: |
+        name: condo
+        replicaCount: 1
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+          name: condo
+        virtualService:
+          hosts:
+            - "condo.jmainguy.com"
+        image:
+          repository: zot.soh.re
+          name: condo/condo
+          tag: "latest"
+          pullPolicy: Always
+        secret:
+          enabled: true
+          name: condo-secret
+
+  destination:
+    name: k3s.soh.re
+    namespace: condo-jmainguy-com
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
