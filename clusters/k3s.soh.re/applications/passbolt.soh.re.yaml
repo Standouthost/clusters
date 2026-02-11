@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: passbolt-soh-re
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Standouthost/helm-charts
+    targetRevision: main
+    path: passbolt
+    helm:
+      releaseName: passbolt
+  destination:
+    name: k3s.soh.re
+    namespace: passbolt-soh-re
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+
