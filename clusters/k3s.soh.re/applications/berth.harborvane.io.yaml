@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: berth-harborvane-io
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.4.0
+    helm:
+      values: |
+        name: berth
+        replicaCount: 1
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 8080
+          name: berth
+        virtualService:
+          hosts:
+            - "berth.harborvane.io"
+        image:
+          repository: zot.soh.re
+          name: berth/berth
+          tag: "latest"
+          pullPolicy: Always
+
+  destination:
+    name: k3s.soh.re
+    namespace: harborvane-io
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
