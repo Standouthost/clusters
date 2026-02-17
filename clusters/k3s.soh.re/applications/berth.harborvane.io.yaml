@@ -21,6 +21,7 @@ spec:
         virtualService:
           hosts:
             - "berth.harborvane.io"
+            - "bertha.harborvane.io"
         image:
           repository: zot.soh.re
           name: berth/server
