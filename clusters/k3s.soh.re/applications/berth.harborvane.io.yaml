@@ -33,12 +33,11 @@ spec:
           BASE_URL: "https://berth.harborvane.io"
           PORT: 8080
           UPLOAD_DIR: /data/uploads
-          DATABSE_URL: "file:/data/db/berth.db?_pragma=foreign_keys(1)"
+          DATABASE_URL: "file:/data/db/berth.db?_pragma=foreign_keys(1)"
         pvc:
           enabled: true
           size: 10Gi
           mountPath: /data
-
 
   destination:
     name: k3s.soh.re
