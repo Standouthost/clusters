@@ -23,7 +23,7 @@ spec:
             - "berth.harborvane.io"
         image:
           repository: zot.soh.re
-          name: berth/berth
+          name: berth/server
           tag: "latest"
           pullPolicy: Always
 
