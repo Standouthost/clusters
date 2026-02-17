@@ -26,10 +26,23 @@ spec:
           name: berth/server
           tag: "latest"
           pullPolicy: Always
+        secret:
+          enabled: true
+          name: berth-secrets
+        env:
+          BASE_URL: "https://berth.harborvane.io"
+          PORT: 8080
+          UPLOAD_DIR: /data/uploads
+          DATABSE_URL: "file:/data/db/berth.db?_pragma=foreign_keys(1)"
+        pvc:
+          enabled: true
+          size: 10Gi
+          mountPath: /data
+
 
   destination:
     name: k3s.soh.re
-    namespace: harborvane-io
+    namespace: berth-harborvane-io
   syncPolicy:
     automated:
       prune: true
