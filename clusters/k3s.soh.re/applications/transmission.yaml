@@ -33,6 +33,7 @@ spec:
           media:
             storageClass: longhorn
             size: 200Gi
+            mountPath: /data
 
 
   destination:
