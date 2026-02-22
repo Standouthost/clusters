@@ -8,7 +8,7 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 2.4.0
+    targetRevision: 3.0.0
     helm:
       values: |
         name: transmission
@@ -29,10 +29,16 @@ spec:
         secret:
           enabled: true
           name: transmission
-        pvc:
-          enabled: true
-          size: 200Gi
-          mountPath: /downloads
+        persistence:
+           - name: downloads
+             mountPath: /downloads              # Where to mount in the container
+             existingClaim: "transmission-pvc"  # Optional: name of existing PVC to use (do not create one)
+           - name: config
+             mountPath: /config
+             size: 1Gi
+           - name: watch
+             mountPath: /watch
+             size: 1Gi
 
   destination:
     name: k3s.soh.re
