@@ -30,10 +30,9 @@ spec:
           enabled: true
           name: transmission
         persistence:
-          media:
-            storageClass: longhorn
-            size: 200Gi
-            mountPath: /downloads
+          enabled: true
+          size: 200Gi
+          mountPath: /downloads
 
   destination:
     name: k3s.soh.re
