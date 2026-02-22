@@ -32,7 +32,7 @@ spec:
         persistence:
            - name: downloads
              mountPath: /downloads              # Where to mount in the container
-             existingClaim: "transmission-pvc"  # Optional: name of existing PVC to use (do not create one)
+             size: 200Gi
            - name: config
              mountPath: /config
              size: 1Gi
