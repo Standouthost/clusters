@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: transmission
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: webapp
+    repoURL: zot.soh.re
+    targetRevision: 2.4.0
+    helm:
+      values: |
+        name: transmission
+        replicaCount: 1
+        service:
+          type: ClusterIP
+          port: 80
+          targetPort: 9091
+          name: transmission
+        virtualService:
+          hosts:
+            - "transmission.jmainguy.com"
+        image:
+          repository: lscr.io
+          name: linuxserver/transmission
+          tag: "latest"
+          pullPolicy: Always
+        secret:
+          enabled: true
+          name: transmission
+        persistence:
+          media:
+            storageClass: longhorn
+            size: 200Gi
+
+
+  destination:
+    name: k3s.soh.re
+    namespace: transmission
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
