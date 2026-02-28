@@ -39,6 +39,16 @@ spec:
           enabled: true
           size: 10Gi
           mountPath: /data
+        postgres:
+          enabled: true
+          name: postgres-cluster
+          instances: 1
+          storage:
+            size: 10Gi
+          bootstrap:
+            initdb:
+              database: berth
+              owner: berth
 
   destination:
     name: k3s.soh.re
