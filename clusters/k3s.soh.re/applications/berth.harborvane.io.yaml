@@ -34,7 +34,6 @@ spec:
           BASE_URL: "https://berth.harborvane.io"
           PORT: 8080
           UPLOAD_DIR: /data/uploads
-          DATABASE_URL: "file:/data/db/berth.db?_pragma=foreign_keys(1)"
         pvc:
           enabled: true
           size: 10Gi
