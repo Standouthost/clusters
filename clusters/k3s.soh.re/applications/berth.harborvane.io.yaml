@@ -8,7 +8,7 @@ spec:
   source:
     chart: webapp
     repoURL: zot.soh.re
-    targetRevision: 2.4.0
+    targetRevision: 3.1.0
     helm:
       values: |
         name: berth
@@ -33,10 +33,10 @@ spec:
           BASE_URL: "https://berth.harborvane.io"
           PORT: 8080
           UPLOAD_DIR: /data/uploads
-        pvc:
-          enabled: true
-          size: 10Gi
-          mountPath: /data
+        persistence:
+          - name: data
+            mountPath: /data
+            size: 10Gi
         postgres:
           enabled: true
           name: postgres-cluster
